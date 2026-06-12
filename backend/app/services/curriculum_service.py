@@ -95,9 +95,9 @@ def get_curriculum_progress(student_no):
             completed_elective_credit += matched.credit
     missing_elective_credit = max(0.0, total_elective_credit - completed_elective_credit)
 
-    overall_completed_credit = completed_required_credit
-    overall_total_credit = total_required_credit
-    overall_missing_credit = missing_required_credit
+    overall_completed_credit = completed_required_credit + completed_elective_credit
+    overall_total_credit = sum(c.credit for c in curriculum.courses)
+    overall_missing_credit = max(0.0, overall_total_credit - overall_completed_credit)
     overall_percentage = progress_percentage
 
     return {
