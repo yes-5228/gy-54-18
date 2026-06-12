@@ -60,7 +60,7 @@ export default function CurriculumPage() {
                   <strong>{progress.curriculum.major}</strong>
                 </div>
                 <div className="metric">
-                  <span>总学分要求</span>
+                  <span>培养方案课程学分</span>
                   <strong>{progress.progress.overall.totalCredit}</strong>
                 </div>
                 <div className="metric">
