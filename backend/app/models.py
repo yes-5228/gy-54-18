@@ -85,3 +85,45 @@ class Appeal(db.Model):
             "createdAt": self.created_at.isoformat(),
             "updatedAt": self.updated_at.isoformat(),
         }
+
+
+class Curriculum(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    major = db.Column(db.String(120), unique=True, nullable=False, index=True)
+    total_required_credit = db.Column(db.Float, nullable=False, default=0)
+    description = db.Column(db.String(255), default="")
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    courses = db.relationship("CurriculumCourse", back_populates="curriculum", cascade="all, delete-orphan")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "major": self.major,
+            "totalRequiredCredit": self.total_required_credit,
+            "description": self.description,
+            "courses": [course.to_dict() for course in self.courses],
+        }
+
+
+class CurriculumCourse(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    curriculum_id = db.Column(db.Integer, db.ForeignKey("curriculum.id"), nullable=False)
+    course_code = db.Column(db.String(40), nullable=False)
+    course_name = db.Column(db.String(120), nullable=False)
+    credit = db.Column(db.Float, nullable=False)
+    course_type = db.Column(db.String(20), default="required", nullable=False)
+    semester_suggested = db.Column(db.String(40), default="")
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    curriculum = db.relationship("Curriculum", back_populates="courses")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "courseCode": self.course_code,
+            "courseName": self.course_name,
+            "credit": self.credit,
+            "courseType": self.course_type,
+            "semesterSuggested": self.semester_suggested,
+        }

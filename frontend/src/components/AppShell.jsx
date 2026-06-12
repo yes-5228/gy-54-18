@@ -1,8 +1,9 @@
-import { BookOpenCheck, ClipboardList, GraduationCap, SearchCheck } from "lucide-react";
+import { BookCheck, BookOpenCheck, ClipboardList, GraduationCap, SearchCheck } from "lucide-react";
 
 const tabs = [
   { id: "teacher", label: "成绩录入", icon: ClipboardList },
   { id: "student", label: "学生查询", icon: SearchCheck },
+  { id: "curriculum", label: "培养计划", icon: BookCheck },
   { id: "appeals", label: "申诉处理", icon: BookOpenCheck },
 ];
 

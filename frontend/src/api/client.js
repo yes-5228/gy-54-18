@@ -30,6 +30,7 @@ export const api = {
       body: JSON.stringify(payload),
     }),
   getTranscript: (studentNo) => request(`/students/${studentNo}/transcript`),
+  getCurriculumProgress: (studentNo) => request(`/students/${studentNo}/curriculum`),
   listAppeals: () => request("/appeals"),
   createAppeal: (payload) =>
     request("/appeals", {
